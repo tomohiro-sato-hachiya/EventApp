@@ -1,0 +1,67 @@
+<%= form_for(@event, url:{controller:"events", action:'new'}) do |form| %>
+    <% if @event.errors.any? %>
+      <div id="error_explanation">
+        <h2 class="h4"><%= pluralize(@event.errors.count, "error") %> エラーが発生しました。</h2>
+  
+        <ul>
+          <% @event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <label for="name">名前</label>
+      <%= form.text_field :name, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+        <label for="detail">詳細</label>
+      <%= form.rich_text_area :detail %>
+    </div>
+
+    <div class="form-group">
+      <label for="participant_limit">参加人数上限</label>
+      <%= form.number_field :participant_limit, {class:'form-control', min:1} %>
+    </div>
+
+    <div class="form-group">
+      <label for="place_id">地域ID</label>
+      <%= form.select :place_id, @id_options %>
+    </div>
+
+    <div class="form-group">
+      <label for="address">開催地住所</label>
+      <%= form.text_field :address, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+      <label for="online">オンライン開催について</label>
+      <%= form.text_area :online, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+      <label for="event_start_datetime">イベント開始日時</label>
+      <%= form.datetime_select :event_start_datetime, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+      <label for="event_end_datetime">イベント終了日時</label>
+      <%= form.datetime_select :event_end_datetime, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+      <label for="entry_start_datetime">エントリー開始日時</label>
+      <%= form.datetime_select :entry_start_datetime, {class:'form-control'} %>
+    </div>
+
+    <div class="form-group">
+      <label for="entry_end_datetime">エントリー終了日時</label>
+      <%= form.datetime_select :entry_end_datetime, {class:'form-control'} %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit "登録", {class:'btn btn-primary'} %>
+    </div>
+  <% end %>

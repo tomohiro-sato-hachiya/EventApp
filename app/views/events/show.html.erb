@@ -1,0 +1,68 @@
+<a class="confirm btn btn-primary
+<% if @entry_disable then %>
+    disabled
+<% end %>" href="/participants/new/<%= @event.id %>" role="button" data-target-name="エントリーの登録">エントリー</a>
+<% if @cancelable then %>
+    <a class="confirm btn btn-primary" href="/participants/destroy/<%= @event.id %>" role="button" data-target-name="エントリーのキャンセル">キャンセル</a>
+<% end %>
+<br/>
+<table class="table">
+    <tr>
+        <th>名前</th>
+        <td>
+            <%= @event.name %>
+            <% if @entry_status != nil then %>
+            <span class="badge badge-info"><%= @entry_status %></span>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <th>主催者</th>
+        <td><%= @event.account_expanded.name %></td>
+    </tr>
+    <tr>
+        <th>参加人数</th>
+        <td><%= @event.participant_limit %></td>
+    </tr>
+    <tr>
+        <th>イベント開催時刻</th>
+        <td>
+            <span class="badge badge-info"><%= @event_datetime %></span>
+            <%= @event.event_start_datetime %>~<%= @event.event_end_datetime %>
+        </td>
+    </tr>
+    <tr>
+        <th>エントリー期間</th>
+        <td>
+            <span class="badge badge-info"><%= @entry_datetime %></span>
+            <%= @event.entry_start_datetime %>~<%= @event.entry_end_datetime %>
+        </td>
+    </tr>
+    <tr>
+        <th>詳細</th>
+        <td><%= @event.detail %></td>
+    </tr>
+    <tr>
+        <th>開催地住所</th>
+        <td><span class="badge badge-info"><%= PLACE_ID_ARRAY[@event.place_id] %></span><%= @event.address %></td>
+    </tr> 
+    <tr>
+        <th>オンライン開催について</th>
+        <td><%= simple_format(@event.online) %></td>
+    </tr>
+    <tr>
+        <th>参加者</th>
+        <td>
+            <strong>参加</strong><br/>
+            <% @participate_able_participants.each do |participant| %>
+                <%= participant.account_expanded.name %>
+               <br/>
+            <% end %>
+            <strong>キャンセル待ち</strong><br/>
+            <% @participate_disable_participants.each do |participant| %>
+                <%= participant.account_expanded.name %>
+               <br/>
+            <% end %>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,7 @@
+<a class="btn btn-primary" href="/events/new" role="button">新規作成</a>
+<hr/>
+<%= render 'organizing_events', events: @in_progress_events, events_headline:"現在開催中のイベント" %>
+<br/>
+<%= render 'organizing_events', events: @before_events, events_headline:"開催前のイベント" %>
+<br/>
+<%= render 'organizing_events', events: @after_events, events_headline:"開催終了したイベント" %>

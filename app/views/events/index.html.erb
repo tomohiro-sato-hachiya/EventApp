@@ -1,0 +1,17 @@
+<% @events.each do |event| %>
+    <p>
+        <a href="/events/<%= event.id %>"><%= event.name %></a>
+        <span class="badge badge-info"><%= PLACE_ID_ARRAY[event.place_id] %></span>
+        <span class="badge badge-info"><%= @entry_datetime_hash[event.id] %></span>
+        <span class="badge badge-info"><%= @event_datetime_hash[event.id] %></span>
+        <% if @entry_status_hash.key? event.id then %>
+            <span class="badge badge-info"><%= @entry_status_hash[event.id] %></span>
+        <% end %>
+    </p>
+    <p>主催者名:<%= event.account_expanded.name %></p>
+    <p>参加上限:<%= event.participant_limit %></p>
+    <p>開催地住所:<%= event.address %></p>
+    <p>開始日時:<%= event.event_start_datetime %></p>
+    <p>終了日時:<%= event.event_end_datetime %></p>
+    <hr/>
+<% end %>

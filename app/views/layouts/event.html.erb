@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EventApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css"/>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="container">
+    <h1>EventApp</h1>
+    <% if !account_signed_in? %>
+      <a class="btn btn-primary" href="<%= new_account_session_path %>" role="button">ログイン</a>
+    <% else %>
+      <a class="btn btn-primary" href="<%= destroy_account_session_path %>" role="button">ログアウト</a>
+    <% end %>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="/">Event</a>
+      <a class="nav-link" href="/">ホーム</a>
+      <a class="nav-link" href="/events">イベントを探す</a>
+      <a class="nav-link" href="/events/organizing">主催イベント</a>
+    </nav>
+    <h2><%= @subtitle %></h2>
+    <h3><%= @description %></h3>
+    <% @error_messages.each do |error_message| %>
+        <div class="alert alert-danger" role="alert"><%= error_message %></div>
+    <% end %>
+    <% @success_messages.each do |success_message| %>
+        <div class="alert alert-success" role="alert"><%= success_message %></div>
+    <% end %>
+    <%= yield %>
+    <footer class="page-footer font-small blue pt-4">
+      <div class="row">
+        <p>© 2020 Copyright:EventApp</p>
+      </div>
+    </footer>
+  </body>
+</html>

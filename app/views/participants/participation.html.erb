@@ -1,0 +1,22 @@
+<%= form_for(@participant, url:{controller:"participants", action:'entry'}) do |form| %>
+    <% if @participant.errors.any? %>
+      <div id="error_explanation">
+        <h2 class="h4"><%= pluralize(@participant.errors.count, "error") %> エラーが発生しました。</h2>
+  
+        <ul>
+          <% @participant.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <label for="participation_status">参加ステータス</label>
+      <%= form.select :participation_status, @participation_status_options %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "更新", {class:'btn btn-primary'} %>
+    </div>
+<% end %>
